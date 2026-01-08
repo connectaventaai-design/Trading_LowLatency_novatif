@@ -1,0 +1,41 @@
+# Main Configuration File
+system:
+  name: "HFT GOLD Trading System"
+  version: "1.0.0"
+  timezone: "UTC"
+  paper_trading: true
+  
+trading:
+  symbol: "XAUUSD"
+  magic_number: 123456
+  max_slippage_points: 10
+  min_profit_points: 5
+  
+timeframes:
+  tick_level:
+    enabled: true
+    window_seconds: 1
+  short_term:
+    enabled: true
+    window_seconds: 120
+    primary: true
+  medium_term:
+    enabled: true
+    window_seconds: 900
+    
+execution:
+  target_latency_ms: 10
+  connection_pool_size: 5
+  order_timeout_seconds: 30
+  max_retries: 3
+  retry_delay_ms: 100
+  
+monitoring:
+  log_level: "INFO"
+  performance_tracking: true
+  metrics_interval_seconds: 60
+  health_check_interval_seconds: 30
+  
+shutdown:
+  graceful_timeout_seconds: 30
+  force_close_positions: true
