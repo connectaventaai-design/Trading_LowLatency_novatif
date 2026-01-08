@@ -1,0 +1,50 @@
+# Risk Management Profiles
+
+conservative:
+  name: "Conservative Mode"
+  risk_per_trade_percent: 0.5
+  max_concurrent_positions: 2
+  max_daily_loss_percent: 2.0
+  max_drawdown_percent: 5.0
+  position_size_multiplier: 0.5
+  take_profit_atr_multiplier: 2.0
+  stop_loss_atr_multiplier: 1.5
+  trailing_stop_enabled: true
+  trailing_stop_atr_multiplier: 1.0
+  max_leverage: 5.0
+  
+moderate:
+  name: "Moderate Mode"
+  risk_per_trade_percent: 1.0
+  max_concurrent_positions: 3
+  max_daily_loss_percent: 5.0
+  max_drawdown_percent: 10.0
+  position_size_multiplier: 1.0
+  take_profit_atr_multiplier: 3.0
+  stop_loss_atr_multiplier: 2.0
+  trailing_stop_enabled: true
+  trailing_stop_atr_multiplier: 1.5
+  max_leverage: 10.0
+  
+aggressive:
+  name: "Aggressive Mode"
+  risk_per_trade_percent: 2.0
+  max_concurrent_positions: 5
+  max_daily_loss_percent: 10.0
+  max_drawdown_percent: 15.0
+  position_size_multiplier: 1.5
+  take_profit_atr_multiplier: 4.0
+  stop_loss_atr_multiplier: 2.5
+  trailing_stop_enabled: true
+  trailing_stop_atr_multiplier: 2.0
+  max_leverage: 20.0
+  
+# Common risk settings
+common:
+  update_interval_ms: 100
+  margin_call_threshold_percent: 80.0
+  emergency_close_threshold_percent: 90.0
+  max_position_hold_hours: 24
+  avoid_overnight_positions: true
+  correlation_threshold: 0.7
+  max_correlated_positions: 2

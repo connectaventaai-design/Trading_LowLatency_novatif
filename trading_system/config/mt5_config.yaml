@@ -1,0 +1,40 @@
+# MT5 Connection Configuration
+connection:
+  timeout_seconds: 60
+  login_timeout_seconds: 30
+  retry_attempts: 5
+  retry_delay_seconds: 5
+  keepalive_interval_seconds: 30
+  
+account:
+  # Set via environment variables
+  account_number: ${MT5_ACCOUNT}
+  password: ${MT5_PASSWORD}
+  server: ${MT5_SERVER}
+  
+data:
+  tick_buffer_size: 10000
+  history_bars: 1000
+  max_bars_download: 50000
+  
+symbols:
+  - name: "XAUUSD"
+    description: "Gold vs US Dollar"
+    point: 0.01
+    tick_size: 0.01
+    tick_value: 0.01
+    contract_size: 100
+    volume_min: 0.01
+    volume_max: 100.0
+    volume_step: 0.01
+    
+trading_hours:
+  # 24/5 market
+  monday_open: "00:00"
+  friday_close: "23:59"
+  exclude_weekends: true
+  
+optimization:
+  tcp_nodelay: true
+  socket_buffer_size: 65536
+  disable_nagle: true

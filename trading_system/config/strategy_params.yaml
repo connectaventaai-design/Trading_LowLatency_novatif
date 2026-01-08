@@ -1,0 +1,134 @@
+# Strategy Hyperparameters
+
+# Technical Indicators
+indicators:
+  atr:
+    period: 14
+    smoothing: "ema"
+  ema_fast: 12
+  ema_slow: 26
+  ema_signal: 9
+  rsi:
+    period: 14
+    overbought: 70
+    oversold: 30
+  bollinger_bands:
+    period: 20
+    std_dev: 2.0
+  volume_ma:
+    period: 20
+    
+# Microstructure Features
+microstructure:
+  vpin:
+    bucket_size: 50
+    window_size: 50
+    toxicity_threshold: 0.7
+  spread_regime:
+    tight_threshold_pips: 2.0
+    wide_threshold_pips: 5.0
+  entropy:
+    window_size: 100
+    high_entropy_threshold: 0.8
+  order_book_imbalance:
+    window_size: 50
+    strong_imbalance_threshold: 0.6
+    
+# Regime Detection
+regime_detection:
+  n_states: 4  # Trending, Ranging, High Volatility, Consolidation
+  n_iter: 100
+  covariance_type: "full"
+  window_size: 200
+  update_interval_bars: 10
+  
+# Hawkes Process
+hawkes_process:
+  kernel: "exponential"
+  window_seconds: 60
+  intensity_threshold: 1.5
+  
+# Signal Generation
+signals:
+  tick_layer:
+    enabled: true
+    weight: 0.2
+    min_confidence: 0.6
+    momentum_threshold: 0.01
+  short_term_layer:
+    enabled: true
+    weight: 0.5
+    min_confidence: 0.7
+    trend_strength_threshold: 0.6
+  medium_term_layer:
+    enabled: true
+    weight: 0.3
+    min_confidence: 0.65
+    trend_strength_threshold: 0.5
+    
+# Entry Conditions
+entry:
+  min_signal_strength: 0.7
+  require_regime_confirmation: true
+  avoid_high_vpin: true
+  wait_for_spread_compression: true
+  require_order_book_imbalance: false
+  min_volume_percentile: 30
+  max_spread_multiplier: 1.5
+  
+# Exit Conditions
+exit:
+  use_dynamic_targets: true
+  time_based_exit_enabled: true
+  max_hold_minutes: 30
+  profit_target_atr_multiplier: 3.0
+  stop_loss_atr_multiplier: 2.0
+  breakeven_after_atr_multiplier: 1.0
+  partial_close_at_target_percent: 50
+  
+# ML Models
+ml_models:
+  lstm:
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+    sequence_length: 60
+    prediction_horizon: 5
+  transformer:
+    d_model: 128
+    nhead: 8
+    num_layers: 4
+    dim_feedforward: 512
+    dropout: 0.1
+    sequence_length: 100
+  kalman_filter:
+    process_noise: 0.01
+    measurement_noise: 0.1
+    initial_state_covariance: 1.0
+    
+# Feature Engineering
+features:
+  lookback_periods: [5, 10, 20, 50, 100]
+  price_transforms: ["returns", "log_returns", "pct_change"]
+  volume_transforms: ["volume_ratio", "volume_ma_ratio"]
+  normalization: "zscore"
+  window_size: 200
+  
+# Walk-Forward Optimization
+walk_forward:
+  train_period_days: 180
+  test_period_days: 30
+  step_days: 30
+  min_trades: 100
+  
+# News Avoidance
+news_filter:
+  enabled: true
+  avoid_minutes_before: 15
+  avoid_minutes_after: 30
+  high_impact_events:
+    - "NFP"
+    - "FOMC"
+    - "CPI"
+    - "GDP"
+    - "Interest Rate Decision"
